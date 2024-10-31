@@ -1,0 +1,19 @@
+networks:
+  dev_clickhouse:
+
+services:
+  clickhouse-server:
+    image: yandex/clickhouse-server:latest
+    container_name: clickhouse-server
+    volumes:
+      - ./data:/var/lib/clickhouse
+      # - ./logs:/var/log/clickhouse-server
+    networks:
+    - dev_clickhouse
+    ports:
+    - "8123:8123"
+    - "9000:9000"
+    environment:
+      - CLICKHOUSE_USER=base_user
+      - CLICKHOUSE_PASSWORD=base_user_pass
+      - CLICKHOUSE_DB=base_db
